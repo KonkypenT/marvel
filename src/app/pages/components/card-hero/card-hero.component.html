@@ -1,0 +1,9 @@
+<div *ngIf="hero" class="hero">
+  <h2 class="name">{{ hero.name }}</h2>
+  <div class="images">
+    <img alt="" src="{{ hero.thumbnail.path }}.{{ hero.thumbnail.extension }}" />
+    <div class="description">
+      {{ hero.description || 'No description' }}
+    </div>
+  </div>
+</div>

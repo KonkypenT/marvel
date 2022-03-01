@@ -5,6 +5,7 @@ import { Select, Store } from '@ngxs/store';
 import { HeroesState } from '../../shared/store/heroes/heroes.state';
 import { SetHeroes } from '../../shared/store/heroes/heroes.action';
 import { HeroModel } from '../../shared/models/hero/hero.model';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-heroes',
@@ -17,15 +18,31 @@ export class HeroesComponent implements OnInit {
   @Select(HeroesState.getHeroes)
   public heroes$!: Observable<HeroModel[]>;
 
+  public loaderIsVisible = false;
+
   constructor(private heroesService: HeroesService, private store: Store) {}
 
   public ngOnInit(): void {
+    this.getHeroes();
+  }
+
+  public loadMoreData(): void {
+    this.loaderIsVisible = true;
+    const countHeroes = this.store.selectSnapshot(HeroesState.getCountHeroes);
+    this.getHeroes(countHeroes);
+  }
+
+  public trackByFn(index: number): number {
+    return index;
+  }
+
+  private getHeroes(offset: number = 0): void {
     this.heroesService
-      .getHeroes()
-      .pipe(first())
-      .subscribe((result) => {
-        console.log(result[0]);
-        this.store.dispatch(new SetHeroes(result));
-      });
+      .getHeroes(offset)
+      .pipe(
+        first(),
+        finalize(() => (this.loaderIsVisible = false)),
+      )
+      .subscribe((result) => this.store.dispatch([new SetHeroes(result)]));
   }
 }

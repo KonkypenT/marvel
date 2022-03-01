@@ -1,11 +1,17 @@
 <div class="container">
-  <div *ngFor="let hero of heroes$ | async" class="hero">
-    <h2 class="name">{{ hero.name }}</h2>
-    <div class="images">
-      <img alt="" src="{{ hero.thumbnail.path }}.{{ hero.thumbnail.extension }}" />
-      <div class="description">
-        {{ hero.description || 'No description' }}
-      </div>
+  <div class="content">
+    <div *ngFor="let hero of heroes$ | async; trackBy: trackByFn" class="hero">
+      <app-card-hero [hero]="hero"></app-card-hero>
     </div>
   </div>
+  <button
+    *ngIf="(heroes$ | async)?.length"
+    mat-raised-button
+    color="accent"
+    [disabled]="loaderIsVisible"
+    (click)="loadMoreData()"
+  >
+    Load more data
+  </button>
+  <mat-progress-bar *ngIf="loaderIsVisible" mode="indeterminate"></mat-progress-bar>
 </div>

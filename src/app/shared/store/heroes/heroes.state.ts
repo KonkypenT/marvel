@@ -14,8 +14,15 @@ export class HeroesState {
     return state;
   }
 
+  @Selector()
+  public static getCountHeroes(state: HeroModel[]): number {
+    return state.length;
+  }
+
   @Action(SetHeroes)
-  public setHeroes({ setState }: StateContext<HeroModel[]>, { heroes }: SetHeroes): void {
-    setState(heroes);
+  public setHeroes({ setState, getState }: StateContext<HeroModel[]>, { heroes }: SetHeroes): void {
+    const unionArrays = getState().concat(heroes);
+    const arr = unionArrays.filter((c, i, a) => a.findIndex((card) => card.id === c.id) === i);
+    setState([...arr]);
   }
 }

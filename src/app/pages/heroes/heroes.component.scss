@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 10px;
+  row-gap: 10px;
+  margin: 15px 0;
+}
+
+.hero {
+  width: 250px;
+  color: white;
+  background: #262626;
+  padding: 0 5px;
+
+  :hover .description {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .images {
+    position: relative;
+  }
+
+  .description {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+    background: rgba(48, 48, 48, 0.7);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.5s opacity, 0.5s visibility;
+  }
+
+  img {
+    width: 250px;
+    height: 250px;
+  }
+}
+
+@media (max-width: 799px) {
+  .container {
+    justify-content: space-evenly;
+  }
+}

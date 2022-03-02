@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -10,4 +10,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class HeaderComponent {
   @Input() public buttonBackIsVisible: boolean = false;
   @Input() public title: string = 'Heroes';
+
+  @Output() public back: EventEmitter<void> = new EventEmitter<void>();
 }

@@ -1,0 +1,42 @@
+:host {
+  width: 100%;
+}
+
+app-card-hero {
+  --width: 300px;
+  --height: 300px;
+}
+
+.container {
+  padding: 0 10px;
+  display: grid;
+  grid-template-areas:
+    'hero description'
+    'comics comics';
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
+}
+
+.card-hero {
+  grid-area: hero;
+}
+
+.description {
+  grid-area: description;
+}
+
+.comics {
+  grid-area: comics;
+}
+
+@media (max-width: 500px) {
+  .description {
+    display: none;
+  }
+}
+
+@media (max-width: 340px) {
+  .accordion {
+    width: 305px;
+  }
+}

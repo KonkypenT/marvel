@@ -18,4 +18,12 @@ export class HeroesService {
       .get<ResponseBaseModel<HeroModel>>(url, { params: new InterceptorHttpParams(new InterceptorConfig(true)) })
       .pipe(map((val) => val.data.results));
   }
+
+  public getHero(id: number): Observable<HeroModel[]> {
+    const url = Urls.getHero(id);
+
+    return this.httpClient
+      .get<ResponseBaseModel<HeroModel>>(url, { params: new InterceptorHttpParams(new InterceptorConfig(true)) })
+      .pipe(map((val) => val.data.results));
+  }
 }

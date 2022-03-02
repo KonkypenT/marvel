@@ -1,5 +1,11 @@
 <mat-toolbar>
-  <button *ngIf="buttonBackIsVisible" class="example-icon" mat-icon-button aria-label="icon-button with menu icon">
+  <button
+    *ngIf="buttonBackIsVisible"
+    class="example-icon"
+    mat-icon-button
+    aria-label="icon-button with menu icon"
+    (click)="back.emit()"
+  >
     <mat-icon color="accent">arrow_back</mat-icon>
   </button>
   <span>{{ title }}</span>

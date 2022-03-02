@@ -6,6 +6,8 @@ import { HeroesState } from '../../shared/store/heroes/heroes.state';
 import { SetHeroes } from '../../shared/store/heroes/heroes.action';
 import { HeroModel } from '../../shared/models/hero/hero.model';
 import { finalize } from 'rxjs/operators';
+import { SetCurrentHero } from '../../shared/store/current-hero/current-hero.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
@@ -20,10 +22,11 @@ export class HeroesComponent implements OnInit {
 
   public loaderIsVisible = false;
 
-  constructor(private heroesService: HeroesService, private store: Store) {}
+  constructor(private heroesService: HeroesService, private store: Store, private router: Router) {}
 
   public ngOnInit(): void {
-    this.getHeroes();
+    const heroes = this.store.selectSnapshot(HeroesState.getHeroes);
+    !heroes?.length && this.getHeroes();
   }
 
   public loadMoreData(): void {
@@ -34,6 +37,11 @@ export class HeroesComponent implements OnInit {
 
   public trackByFn(index: number): number {
     return index;
+  }
+
+  public chooseHero(hero: HeroModel): void {
+    this.store.dispatch(new SetCurrentHero(hero));
+    this.router.navigate([`hero/${hero.id}`]);
   }
 
   private getHeroes(offset: number = 0): void {

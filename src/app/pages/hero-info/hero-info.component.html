@@ -1,0 +1,18 @@
+<div *ngIf="currentHero$ | async as hero" class="container">
+  <app-card-hero
+    class="card-hero"
+    [hero]="hero"
+    [descriptionIsVisible]="false"
+    [titleIsVisible]="false"
+  ></app-card-hero>
+
+  <div class="description">{{ hero.description || 'No description' }}</div>
+
+  <mat-accordion class="accordion comics" multi>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Comics</mat-panel-title>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

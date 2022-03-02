@@ -1,7 +1,13 @@
 <div *ngIf="hero" class="hero">
-  <h2 class="name">{{ hero.name }}</h2>
-  <div class="images">
-    <img alt="" src="{{ hero.thumbnail.path }}.{{ hero.thumbnail.extension }}" />
+  <h2 *ngIf="titleIsVisible" class="name" (click)="chooseHero.emit(hero)">
+    {{ hero.name }}
+  </h2>
+  <div class="images" [ngClass]="{ 'with-description': descriptionIsVisible }">
+    <img
+      alt=""
+      src="{{ hero.thumbnail.path }}.{{ hero.thumbnail.extension }}"
+      [ngClass]="{ 'indent-top': !titleIsVisible }"
+    />
     <div class="description">
       {{ hero.description || 'No description' }}
     </div>

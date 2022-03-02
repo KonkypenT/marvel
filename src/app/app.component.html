@@ -1,5 +1,9 @@
 <mat-progress-bar *ngIf="loaderStatus$ | async" mode="indeterminate"></mat-progress-bar>
-<app-header></app-header>
+<app-header
+  [title]="(currentHeroName$ | async) || 'Heroes'"
+  [buttonBackIsVisible]="!!(currentHeroName$ | async)"
+  (back)="goToMainPage()"
+></app-header>
 <div class="container">
   <router-outlet></router-outlet>
 </div>

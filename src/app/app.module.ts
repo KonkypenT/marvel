@@ -11,6 +11,7 @@ import { STORE_LIST } from './shared/store/store-list';
 import { environment } from '../environments/environment';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 import { HttpClientModule } from '@angular/common/http';
+import { HeroInfoModule } from './pages/hero-info/hero-info.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     SharedModule,
     HeroesModule,
+    HeroInfoModule,
     MatProgressBarModule,
     NgxsModule.forRoot(STORE_LIST, { developmentMode: !environment.production }),
     NgxsReduxDevtoolsPluginModule.forRoot(),

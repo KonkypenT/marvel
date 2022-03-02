@@ -19,6 +19,11 @@ export class CurrentHeroState {
     return state.name;
   }
 
+  @Selector()
+  public static getCurrentHeroId(state: HeroModel): number {
+    return state.id;
+  }
+
   @Action(SetCurrentHero)
   public setCurrentHero({ setState }: StateContext<HeroModel>, { hero }: SetCurrentHero): void {
     setState(hero);

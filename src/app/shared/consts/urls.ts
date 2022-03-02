@@ -5,4 +5,6 @@ export class Urls {
     `${environment.baseUrl}?limit=20&offset=${offset}&apikey=${environment.apiKey}`;
 
   public static getHero = (id: number): string => `${environment.baseUrl}/${id}?apikey=${environment.apiKey}`;
+
+  public static getComics = (id: number): string => `${environment.baseUrl}/${id}/comics?apikey=${environment.apiKey}`;
 }

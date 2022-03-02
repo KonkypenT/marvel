@@ -9,10 +9,23 @@
   <div class="description">{{ hero.description || 'No description' }}</div>
 
   <mat-accordion class="accordion comics" multi>
-    <mat-expansion-panel>
+    <mat-expansion-panel (opened)="openComics()">
       <mat-expansion-panel-header>
         <mat-panel-title>Comics</mat-panel-title>
       </mat-expansion-panel-header>
+
+      <mat-spinner *ngIf="!(comics$ | async)" diameter="50"></mat-spinner>
+
+      <div *ngFor="let comics of comics$ | async" class="card-info">
+        <div class="image">
+          <img alt="" src="{{ comics.thumbnail.path }}.{{ comics.thumbnail.extension }}" />
+          <div class="description">
+            {{ comics.title }}
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="(comics$ | async) && !(comics$ | async)?.length" class="no-info">Нет информации</div>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

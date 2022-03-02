@@ -1,15 +1,17 @@
-import { HeroImageModel } from './hero-image.model';
+import { ImageModel } from './image.model';
+import { ShortOptionalInfoModel } from './short-optional-info.model';
+import { UrlModel } from './url.model';
 
 export interface HeroModel {
   id: number;
   name: string;
   description: string;
   modified: Date;
-  thumbnail: HeroImageModel;
-  comics: any;
-  events: any;
+  thumbnail: ImageModel;
+  comics: ShortOptionalInfoModel[];
+  events: ShortOptionalInfoModel[];
   resourceURI: string;
-  series: any;
-  stories: any;
-  urls: any;
+  series: ShortOptionalInfoModel[];
+  stories: ShortOptionalInfoModel[];
+  urls: UrlModel[];
 }

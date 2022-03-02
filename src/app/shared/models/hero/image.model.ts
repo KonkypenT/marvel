@@ -1,4 +1,4 @@
-export interface HeroImageModel {
+export interface ImageModel {
   extension: string;
   path: string;
 }

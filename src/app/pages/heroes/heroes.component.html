@@ -1,7 +1,7 @@
 <div class="container">
   <div class="content">
     <div *ngFor="let hero of heroes$ | async; trackBy: trackByFn" class="hero">
-      <app-card-hero [hero]="hero" (chooseHero)="chooseHero($event)"></app-card-hero>
+      <app-info-card [data]="hero" (chooseHero)="chooseHero($event)"></app-info-card>
     </div>
   </div>
   <button

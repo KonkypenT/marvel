@@ -1,0 +1,29 @@
+.comics-panel {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  row-gap: 20px;
+  column-gap: 50px;
+
+  &.column {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 795px) {
+  .comics-panel {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 500px) {
+  .comics-panel {
+    column-gap: 10px;
+  }
+}
+
+@media (max-width: 340px) {
+  .accordion {
+    width: 305px;
+  }
+}

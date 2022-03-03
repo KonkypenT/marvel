@@ -2,13 +2,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CardInfoModel } from '../../../shared/models/hero/card-info.model';
 
 @Component({
-  selector: 'app-card-hero',
+  selector: 'app-info-card',
   templateUrl: './info-card.component.html',
   styleUrls: ['./info-card.component.scss'],
 })
-/** Компонент для отображения карточки с героем */
+/** Компонент для отображения карточки с информацией о герое, комиксе, сериале */
 export class InfoCardComponent {
-  @Input() public hero: CardInfoModel | null = null;
+  @Input() public data: CardInfoModel | null = null;
   @Input() public descriptionIsVisible: boolean = true;
   @Input() public titleIsVisible: boolean = true;
 

@@ -6,7 +6,12 @@ import { CurrentHeroState } from '../../shared/store/current-hero/current-hero.s
 import { HeroesService } from '../../shared/rest/heroes.service';
 import { SetCurrentHero } from '../../shared/store/current-hero/current-hero.action';
 import { OptionalInfoForHeroState } from '../../shared/store/optional-info-for-hero/optional-info-for-hero.state';
-import { SetComics, SetSeries } from '../../shared/store/optional-info-for-hero/optional-info-for-hero.action';
+import {
+  SetComics,
+  SetEvents,
+  SetSeries,
+  SetStories,
+} from '../../shared/store/optional-info-for-hero/optional-info-for-hero.action';
 import { CardInfoModel } from '../../shared/models/hero/card-info.model';
 
 @Component({
@@ -24,6 +29,12 @@ export class HeroInfoComponent implements OnInit {
 
   @Select(OptionalInfoForHeroState.getSeries)
   public series$!: Observable<CardInfoModel[] | null>;
+
+  @Select(OptionalInfoForHeroState.getStories)
+  public stories$!: Observable<CardInfoModel[] | null>;
+
+  @Select(OptionalInfoForHeroState.getEvents)
+  public events$!: Observable<CardInfoModel[] | null>;
 
   constructor(private route: ActivatedRoute, private store: Store, private heroesService: HeroesService) {}
 
@@ -57,6 +68,34 @@ export class HeroInfoComponent implements OnInit {
       .getSeries(id)
       .pipe(first())
       .subscribe((result) => this.store.dispatch(new SetSeries(result)));
+  }
+
+  public openStories(): void {
+    const stories = this.store.selectSnapshot(OptionalInfoForHeroState.getStories);
+    const id = this.store.selectSnapshot(CurrentHeroState.getCurrentHeroId);
+
+    if (stories?.length) {
+      return;
+    }
+
+    this.heroesService
+      .getStories(id)
+      .pipe(first())
+      .subscribe((result) => this.store.dispatch(new SetStories(result)));
+  }
+
+  public openEvents(): void {
+    const events = this.store.selectSnapshot(OptionalInfoForHeroState.getEvents);
+    const id = this.store.selectSnapshot(CurrentHeroState.getCurrentHeroId);
+
+    if (events?.length) {
+      return;
+    }
+
+    this.heroesService
+      .getEvents(id)
+      .pipe(first())
+      .subscribe((result) => this.store.dispatch(new SetEvents(result)));
   }
 
   private eventForRoute(): void {

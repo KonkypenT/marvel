@@ -7,9 +7,11 @@ import { HeroesModule } from '../heroes/heroes.module';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HistoryCardComponent } from '../components/history-card/history-card.component';
+import { AccordionPanelComponent } from '../components/accordion-panel/accordion-panel.component';
 
 @NgModule({
-  declarations: [HeroInfoComponent],
+  declarations: [HeroInfoComponent, HistoryCardComponent, AccordionPanelComponent],
   imports: [
     CommonModule,
     SharedModule,

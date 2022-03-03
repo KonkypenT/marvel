@@ -39,4 +39,16 @@ export class HeroesService {
 
     return this.httpClient.get<ResponseBaseModel<CardInfoModel>>(url).pipe(map((val) => val.data.results));
   }
+
+  public getStories(id: number): Observable<CardInfoModel[]> {
+    const url = Urls.getStories(id);
+
+    return this.httpClient.get<ResponseBaseModel<CardInfoModel>>(url).pipe(map((val) => val.data.results));
+  }
+
+  public getEvents(id: number): Observable<CardInfoModel[]> {
+    const url = Urls.getEvents(id);
+
+    return this.httpClient.get<ResponseBaseModel<CardInfoModel>>(url).pipe(map((val) => val.data.results));
+  }
 }

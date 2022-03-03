@@ -1,15 +1,15 @@
-<div *ngIf="hero" class="hero">
-  <h2 *ngIf="titleIsVisible" class="name" (click)="chooseHero.emit(hero)">
-    {{ hero.title }}
+<div *ngIf="data" class="card">
+  <h2 *ngIf="titleIsVisible" class="name" (click)="chooseHero.emit(data)">
+    {{ data.title }}
   </h2>
   <div class="images" [ngClass]="{ 'with-description': descriptionIsVisible }">
     <img
       alt=""
-      src="{{ hero.thumbnail.path }}.{{ hero.thumbnail.extension }}"
+      src="{{ data.thumbnail.path }}.{{ data.thumbnail.extension }}"
       [ngClass]="{ 'indent-top': !titleIsVisible }"
     />
     <div class="description">
-      {{ hero.description || 'No description' }}
+      {{ data.description || 'No description' }}
     </div>
   </div>
 </div>

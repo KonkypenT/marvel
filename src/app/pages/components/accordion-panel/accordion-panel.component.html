@@ -1,0 +1,14 @@
+<mat-accordion class="accordion" multi>
+  <mat-expansion-panel (opened)="openPanel.emit()">
+    <mat-expansion-panel-header>
+      <mat-panel-title>{{ title }}</mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-spinner *ngIf="!data" diameter="50"></mat-spinner>
+
+    <div class="comics-panel" [ngClass]="{ column: displayColumnContent }">
+      <ng-content></ng-content>
+    </div>
+
+    <div *ngIf="data && !data?.length" class="no-info">No information</div>
+  </mat-expansion-panel>
+</mat-accordion>

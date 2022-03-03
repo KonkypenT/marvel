@@ -14,7 +14,9 @@
   grid-template-areas:
     'hero description'
     'comics comics'
-    'series series';
+    'series series'
+    'stories stories'
+    'events events';
   grid-row-gap: 15px;
   grid-column-gap: 15px;
 }
@@ -35,15 +37,15 @@
   grid-area: series;
 }
 
-.comics-panel {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  row-gap: 20px;
-  column-gap: 50px;
+.stories {
+  grid-area: stories;
 }
 
-.card-comics {
+.events {
+  grid-area: events;
+}
+
+.card-info {
   --width: 200px;
   --height: 250px;
   --title-size: 14px;
@@ -51,24 +53,8 @@
   --title-padding: 5px 0 0 0;
 }
 
-@media (max-width: 795px) {
-  .comics-panel {
-    justify-content: center;
-  }
-}
-
 @media (max-width: 500px) {
   .description {
     display: none;
-  }
-
-  .comics-panel {
-    column-gap: 10px;
-  }
-}
-
-@media (max-width: 340px) {
-  .accordion {
-    width: 305px;
   }
 }

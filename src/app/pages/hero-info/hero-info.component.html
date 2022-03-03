@@ -1,52 +1,48 @@
 <div *ngIf="currentHero$ | async as hero" class="container">
-  <app-card-hero
+  <app-info-card
     class="card-hero"
-    [hero]="hero"
+    [data]="hero"
     [descriptionIsVisible]="false"
     [titleIsVisible]="false"
-  ></app-card-hero>
+  ></app-info-card>
 
   <div class="description">{{ hero.description || 'No description' }}</div>
 
-  <mat-accordion class="accordion comics" multi>
-    <mat-expansion-panel (opened)="openComics()">
-      <mat-expansion-panel-header>
-        <mat-panel-title>Comics</mat-panel-title>
-      </mat-expansion-panel-header>
+  <app-accordion-panel class="comics" [data]="comics$ | async" [title]="'Comics'" (openPanel)="openComics()">
+    <app-info-card
+      *ngFor="let comics of comics$ | async"
+      class="card-info"
+      [data]="comics"
+      [descriptionIsVisible]="false"
+    ></app-info-card>
+  </app-accordion-panel>
 
-      <mat-spinner *ngIf="!(comics$ | async)" diameter="50"></mat-spinner>
+  <app-accordion-panel class="series" [data]="series$ | async" [title]="'Series'" (openPanel)="openSeries()">
+    <app-info-card
+      *ngFor="let series of series$ | async"
+      class="card-info"
+      [data]="series"
+      [descriptionIsVisible]="false"
+    ></app-info-card>
+  </app-accordion-panel>
 
-      <div class="comics-panel">
-        <app-card-hero
-          *ngFor="let comics of comics$ | async"
-          class="card-comics"
-          [hero]="comics"
-          [descriptionIsVisible]="false"
-        ></app-card-hero>
-      </div>
+  <app-accordion-panel
+    class="stories"
+    [data]="stories$ | async"
+    [title]="'Stories'"
+    [displayColumnContent]="true"
+    (openPanel)="openStories()"
+  >
+    <app-history-card *ngFor="let stories of stories$ | async" class="card-comics" [data]="stories"></app-history-card>
+  </app-accordion-panel>
 
-      <div *ngIf="(comics$ | async) && !(comics$ | async)?.length" class="no-info">Нет информации</div>
-    </mat-expansion-panel>
-  </mat-accordion>
-
-  <mat-accordion class="accordion series" multi>
-    <mat-expansion-panel (opened)="openSeries()">
-      <mat-expansion-panel-header>
-        <mat-panel-title>Series</mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <mat-spinner *ngIf="!(series$ | async)" diameter="50"></mat-spinner>
-
-      <div class="comics-panel">
-        <app-card-hero
-          *ngFor="let series of series$ | async"
-          class="card-comics"
-          [hero]="series"
-          [descriptionIsVisible]="false"
-        ></app-card-hero>
-      </div>
-
-      <div *ngIf="(comics$ | async) && !(comics$ | async)?.length" class="no-info">Нет информации</div>
-    </mat-expansion-panel>
-  </mat-accordion>
+  <app-accordion-panel
+    class="events"
+    [data]="events$ | async"
+    [title]="'Events'"
+    [displayColumnContent]="true"
+    (openPanel)="openEvents()"
+  >
+    <app-history-card *ngFor="let event of events$ | async" class="card-comics" [data]="event"></app-history-card>
+  </app-accordion-panel>
 </div>

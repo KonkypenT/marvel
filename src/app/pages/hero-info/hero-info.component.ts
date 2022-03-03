@@ -6,7 +6,7 @@ import { CurrentHeroState } from '../../shared/store/current-hero/current-hero.s
 import { HeroesService } from '../../shared/rest/heroes.service';
 import { SetCurrentHero } from '../../shared/store/current-hero/current-hero.action';
 import { OptionalInfoForHeroState } from '../../shared/store/optional-info-for-hero/optional-info-for-hero.state';
-import { SetComics } from '../../shared/store/optional-info-for-hero/optional-info-for-hero.action';
+import { SetComics, SetSeries } from '../../shared/store/optional-info-for-hero/optional-info-for-hero.action';
 import { CardInfoModel } from '../../shared/models/hero/card-info.model';
 
 @Component({
@@ -21,6 +21,9 @@ export class HeroInfoComponent implements OnInit {
 
   @Select(OptionalInfoForHeroState.getComics)
   public comics$!: Observable<CardInfoModel[] | null>;
+
+  @Select(OptionalInfoForHeroState.getSeries)
+  public series$!: Observable<CardInfoModel[] | null>;
 
   constructor(private route: ActivatedRoute, private store: Store, private heroesService: HeroesService) {}
 
@@ -40,6 +43,20 @@ export class HeroInfoComponent implements OnInit {
       .getComics(id)
       .pipe(first())
       .subscribe((result) => this.store.dispatch(new SetComics(result)));
+  }
+
+  public openSeries(): void {
+    const series = this.store.selectSnapshot(OptionalInfoForHeroState.getSeries);
+    const id = this.store.selectSnapshot(CurrentHeroState.getCurrentHeroId);
+
+    if (series?.length) {
+      return;
+    }
+
+    this.heroesService
+      .getSeries(id)
+      .pipe(first())
+      .subscribe((result) => this.store.dispatch(new SetSeries(result)));
   }
 
   private eventForRoute(): void {

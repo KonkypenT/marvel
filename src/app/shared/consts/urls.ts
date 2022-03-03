@@ -7,4 +7,6 @@ export class Urls {
   public static getHero = (id: number): string => `${environment.baseUrl}/${id}?apikey=${environment.apiKey}`;
 
   public static getComics = (id: number): string => `${environment.baseUrl}/${id}/comics?apikey=${environment.apiKey}`;
+
+  public static getSeries = (id: number): string => `${environment.baseUrl}/${id}/series?apikey=${environment.apiKey}`;
 }

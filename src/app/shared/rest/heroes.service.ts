@@ -33,4 +33,10 @@ export class HeroesService {
 
     return this.httpClient.get<ResponseBaseModel<CardInfoModel>>(url).pipe(map((val) => val.data.results));
   }
+
+  public getSeries(id: number): Observable<CardInfoModel[]> {
+    const url = Urls.getSeries(id);
+
+    return this.httpClient.get<ResponseBaseModel<CardInfoModel>>(url).pipe(map((val) => val.data.results));
+  }
 }

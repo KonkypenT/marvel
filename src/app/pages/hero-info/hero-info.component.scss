@@ -13,7 +13,8 @@
   grid-template-columns: 300px 1fr;
   grid-template-areas:
     'hero description'
-    'comics comics';
+    'comics comics'
+    'series series';
   grid-row-gap: 15px;
   grid-column-gap: 15px;
 }
@@ -30,11 +31,16 @@
   grid-area: comics;
 }
 
+.series {
+  grid-area: series;
+}
+
 .comics-panel {
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   row-gap: 20px;
+  column-gap: 50px;
 }
 
 .card-comics {
@@ -45,13 +51,18 @@
   --title-padding: 5px 0 0 0;
 }
 
+@media (max-width: 795px) {
+  .comics-panel {
+    justify-content: center;
+  }
+}
+
 @media (max-width: 500px) {
   .description {
     display: none;
   }
 
   .comics-panel {
-    justify-content: center;
     column-gap: 10px;
   }
 }

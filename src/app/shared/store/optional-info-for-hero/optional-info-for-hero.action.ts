@@ -6,6 +6,12 @@ export class SetComics {
   constructor(public comics: CardInfoModel[]) {}
 }
 
+/** Сохранить сериалы */
+export class SetSeries {
+  public static readonly type = '[Optional Info] Set Series';
+  constructor(public series: CardInfoModel[]) {}
+}
+
 /** Сбросить состояние Доп инфы */
 export class ResetOptionalInfo {
   public static readonly type = '[Optional Info] Reset Optional Info';

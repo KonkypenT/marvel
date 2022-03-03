@@ -2,6 +2,9 @@
   display: block;
   --width: 250px;
   --height: 250px;
+  --title-size: 20px;
+  --title-line-height: 2;
+  --title-padding: 0px;
 }
 
 .hero {
@@ -12,6 +15,9 @@
 
   .name {
     cursor: pointer;
+    padding: var(--title-padding);
+    font-size: var(--title-size);
+    line-height: var(--title-line-height);
   }
 
   .with-description:hover .description {

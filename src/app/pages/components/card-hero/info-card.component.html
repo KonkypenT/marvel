@@ -1,6 +1,6 @@
 <div *ngIf="hero" class="hero">
   <h2 *ngIf="titleIsVisible" class="name" (click)="chooseHero.emit(hero)">
-    {{ hero.name }}
+    {{ hero.title }}
   </h2>
   <div class="images" [ngClass]="{ 'with-description': descriptionIsVisible }">
     <img

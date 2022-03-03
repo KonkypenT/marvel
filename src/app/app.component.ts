@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { CurrentHeroState } from './shared/store/current-hero/current-hero.state';
 import { Router } from '@angular/router';
 import { ResetCurrentHero } from './shared/store/current-hero/current-hero.action';
+import { ResetOptionalInfo } from './shared/store/optional-info-for-hero/optional-info-for-hero.action';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent {
   constructor(private router: Router, private store: Store) {}
 
   public goToMainPage(): void {
-    this.store.dispatch(ResetCurrentHero);
+    this.store.dispatch([ResetCurrentHero, ResetOptionalInfo]);
     this.router.navigate(['heroes']);
   }
 }

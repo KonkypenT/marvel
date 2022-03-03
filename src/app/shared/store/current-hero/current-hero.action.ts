@@ -1,9 +1,9 @@
-import { HeroModel } from '../../models/hero/hero.model';
+import { CardInfoModel } from '../../models/hero/card-info.model';
 
 /** Сохранить текущего героя в стейт */
 export class SetCurrentHero {
   public static readonly type = '[Current Hero] Set Current Hero';
-  constructor(public hero: HeroModel) {}
+  constructor(public hero: CardInfoModel) {}
 }
 
 /** Сбросить текущего героя из стейта */

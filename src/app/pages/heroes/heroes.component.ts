@@ -4,10 +4,10 @@ import { first, Observable } from 'rxjs';
 import { Select, Store } from '@ngxs/store';
 import { HeroesState } from '../../shared/store/heroes/heroes.state';
 import { SetHeroes } from '../../shared/store/heroes/heroes.action';
-import { HeroModel } from '../../shared/models/hero/hero.model';
 import { finalize } from 'rxjs/operators';
 import { SetCurrentHero } from '../../shared/store/current-hero/current-hero.action';
 import { Router } from '@angular/router';
+import { CardInfoModel } from '../../shared/models/hero/card-info.model';
 
 @Component({
   selector: 'app-heroes',
@@ -18,7 +18,7 @@ import { Router } from '@angular/router';
 /** Компонент для отображения списка с героями */
 export class HeroesComponent implements OnInit {
   @Select(HeroesState.getHeroes)
-  public heroes$!: Observable<HeroModel[]>;
+  public heroes$!: Observable<CardInfoModel[]>;
 
   public loaderIsVisible = false;
 
@@ -39,7 +39,7 @@ export class HeroesComponent implements OnInit {
     return index;
   }
 
-  public chooseHero(hero: HeroModel): void {
+  public chooseHero(hero: CardInfoModel): void {
     this.store.dispatch(new SetCurrentHero(hero));
     this.router.navigate([`hero/${hero.id}`]);
   }

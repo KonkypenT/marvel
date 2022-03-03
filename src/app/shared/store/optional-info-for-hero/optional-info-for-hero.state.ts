@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { ComicsInfoModel } from '../../models/hero/comics-info.model';
+import { CardInfoModel } from '../../models/hero/card-info.model';
 import { OptionalInfoForHeroModel } from '../../models/hero/optional-info-for-hero.model';
-import { SetComics } from './optional-info-for-hero.action';
+import { ResetOptionalInfo, SetComics } from './optional-info-for-hero.action';
 
 @Injectable()
 @State<OptionalInfoForHeroModel>({
@@ -13,7 +13,7 @@ import { SetComics } from './optional-info-for-hero.action';
 })
 export class OptionalInfoForHeroState {
   @Selector()
-  public static getComics(state: OptionalInfoForHeroModel): ComicsInfoModel[] | null {
+  public static getComics(state: OptionalInfoForHeroModel): CardInfoModel[] | null {
     return state.comics;
   }
 
@@ -26,5 +26,10 @@ export class OptionalInfoForHeroState {
     patchState({
       comics: partialComics,
     });
+  }
+
+  @Action(ResetOptionalInfo)
+  public resetOptionalInfo({ patchState }: StateContext<OptionalInfoForHeroModel>): void {
+    patchState({ comics: null });
   }
 }

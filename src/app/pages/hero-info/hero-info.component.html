@@ -16,13 +16,13 @@
 
       <mat-spinner *ngIf="!(comics$ | async)" diameter="50"></mat-spinner>
 
-      <div *ngFor="let comics of comics$ | async" class="card-info">
-        <div class="image">
-          <img alt="" src="{{ comics.thumbnail.path }}.{{ comics.thumbnail.extension }}" />
-          <div class="description">
-            {{ comics.title }}
-          </div>
-        </div>
+      <div class="comics-panel">
+        <app-card-hero
+          *ngFor="let comics of comics$ | async"
+          class="card-comics"
+          [hero]="comics"
+          [descriptionIsVisible]="false"
+        ></app-card-hero>
       </div>
 
       <div *ngIf="(comics$ | async) && !(comics$ | async)?.length" class="no-info">Нет информации</div>

@@ -6,7 +6,7 @@ import { HeroModel } from '../models/hero/hero.model';
 import { InterceptorHttpParams } from '../models/loader-interceptor/interceptor-http-params.model';
 import { InterceptorConfig } from '../models/loader-interceptor/interceptor-config.model';
 import { ResponseBaseModel } from '../models/response-base.model';
-import { ComicsInfoModel } from '../models/hero/comics-info.model';
+import { CardInfoModel } from '../models/hero/card-info.model';
 
 @Injectable({ providedIn: 'root' })
 export class HeroesService {
@@ -28,9 +28,9 @@ export class HeroesService {
       .pipe(map((val) => val.data.results));
   }
 
-  public getComics(id: number): Observable<ComicsInfoModel[]> {
+  public getComics(id: number): Observable<CardInfoModel[]> {
     const url = Urls.getComics(id);
 
-    return this.httpClient.get<ResponseBaseModel<ComicsInfoModel>>(url).pipe(map((val) => val.data.results));
+    return this.httpClient.get<ResponseBaseModel<CardInfoModel>>(url).pipe(map((val) => val.data.results));
   }
 }

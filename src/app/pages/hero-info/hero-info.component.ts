@@ -5,10 +5,9 @@ import { Select, Store } from '@ngxs/store';
 import { CurrentHeroState } from '../../shared/store/current-hero/current-hero.state';
 import { HeroesService } from '../../shared/rest/heroes.service';
 import { SetCurrentHero } from '../../shared/store/current-hero/current-hero.action';
-import { HeroModel } from '../../shared/models/hero/hero.model';
 import { OptionalInfoForHeroState } from '../../shared/store/optional-info-for-hero/optional-info-for-hero.state';
 import { SetComics } from '../../shared/store/optional-info-for-hero/optional-info-for-hero.action';
-import { ComicsInfoModel } from '../../shared/models/hero/comics-info.model';
+import { CardInfoModel } from '../../shared/models/hero/card-info.model';
 
 @Component({
   selector: 'app-hero-info',
@@ -18,10 +17,10 @@ import { ComicsInfoModel } from '../../shared/models/hero/comics-info.model';
 /** Компонент для отображения полной информации о герое */
 export class HeroInfoComponent implements OnInit {
   @Select(CurrentHeroState.getCurrentHero)
-  public currentHero$!: Observable<HeroModel | null>;
+  public currentHero$!: Observable<CardInfoModel | null>;
 
   @Select(OptionalInfoForHeroState.getComics)
-  public comics$!: Observable<ComicsInfoModel[] | null>;
+  public comics$!: Observable<CardInfoModel[] | null>;
 
   constructor(private route: ActivatedRoute, private store: Store, private heroesService: HeroesService) {}
 
@@ -55,6 +54,14 @@ export class HeroInfoComponent implements OnInit {
         switchMap((p) => this.heroesService.getHero(Number(p.get('id')))),
         filter((heroes) => !!heroes?.length),
       )
-      .subscribe((result) => this.store.dispatch(new SetCurrentHero(result[0])));
+      .subscribe((result) => {
+        const partialHero: CardInfoModel = {
+          id: result[0].id,
+          title: result[0].name,
+          description: result[0].description,
+          thumbnail: result[0].thumbnail,
+        };
+        this.store.dispatch(new SetCurrentHero(partialHero));
+      });
   }
 }

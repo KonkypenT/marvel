@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-app-card-hero {
+.card-hero {
   --width: 300px;
   --height: 300px;
 }
@@ -10,6 +10,7 @@ app-card-hero {
 .container {
   padding: 0 10px;
   display: grid;
+  grid-template-columns: 300px 1fr;
   grid-template-areas:
     'hero description'
     'comics comics';
@@ -29,9 +30,29 @@ app-card-hero {
   grid-area: comics;
 }
 
+.comics-panel {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  row-gap: 20px;
+}
+
+.card-comics {
+  --width: 200px;
+  --height: 250px;
+  --title-size: 14px;
+  --title-line-height: 1.2;
+  --title-padding: 5px 0 0 0;
+}
+
 @media (max-width: 500px) {
   .description {
     display: none;
+  }
+
+  .comics-panel {
+    justify-content: center;
+    column-gap: 10px;
   }
 }
 

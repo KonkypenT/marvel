@@ -1,36 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { HeroModel } from '../../models/hero/hero.model';
 import { ResetCurrentHero, SetCurrentHero } from './current-hero.action';
+import { CardInfoModel } from '../../models/hero/card-info.model';
 
 @Injectable()
-@State<HeroModel | null>({
+@State<CardInfoModel | null>({
   name: 'currentHero',
   defaults: null,
 })
 export class CurrentHeroState {
   @Selector()
-  public static getCurrentHero(state: HeroModel): HeroModel {
+  public static getCurrentHero(state: CardInfoModel): CardInfoModel {
     return state;
   }
 
   @Selector()
-  public static getCurrentHeroName(state: HeroModel): string {
-    return state.name;
+  public static getCurrentHeroName(state: CardInfoModel): string {
+    return state.title;
   }
 
   @Selector()
-  public static getCurrentHeroId(state: HeroModel): number {
+  public static getCurrentHeroId(state: CardInfoModel): number {
     return state.id;
   }
 
   @Action(SetCurrentHero)
-  public setCurrentHero({ setState }: StateContext<HeroModel>, { hero }: SetCurrentHero): void {
+  public setCurrentHero({ setState }: StateContext<CardInfoModel>, { hero }: SetCurrentHero): void {
     setState(hero);
   }
 
   @Action(ResetCurrentHero)
-  public resetCurrentHero({ setState }: StateContext<HeroModel | null>): void {
+  public resetCurrentHero({ setState }: StateContext<CardInfoModel | null>): void {
     setState(null);
   }
 }

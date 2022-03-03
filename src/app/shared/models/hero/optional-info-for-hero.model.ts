@@ -1,5 +1,5 @@
-import { ComicsInfoModel } from './comics-info.model';
+import { CardInfoModel } from './card-info.model';
 
 export interface OptionalInfoForHeroModel {
-  comics: ComicsInfoModel[] | null;
+  comics: CardInfoModel[] | null;
 }
